@@ -1,0 +1,3 @@
+borb~=2.1.18
+protobuf >= 3.19.1
+grpcio >= 1.43.0
