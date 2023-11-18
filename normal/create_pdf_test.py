@@ -2,7 +2,6 @@ import json
 
 from borb.pdf import Document
 from borb.pdf.canvas.layout.page_layout.page_layout import PageLayout
-from borb.pdf.page.page import Page
 from borb.pdf.pdf import PDF
 
 from tools.dynamic_paragraph_gen import table_order_paragraph
@@ -19,8 +18,6 @@ if __name__ == '__main__':
     pdf.add_page(page)
     layout: PageLayout = Layout(page)
 
-    page_head_bottom(page)
-
     table_front_gen(json, layout)
 
     table_middle1_gen(json, layout)
@@ -34,6 +31,12 @@ if __name__ == '__main__':
     table_order_paragraph(json, layout)
 
     table_bottom_gen(json, layout)
+
+    table_middle4_gen(layout)
+
+    table_order_paragraph(json, layout)
+
+    page_head_bottom(pdf)
 
     with open("output.pdf", "wb") as out_file_handle:
         PDF.dumps(out_file_handle, pdf)

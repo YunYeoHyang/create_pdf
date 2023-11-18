@@ -1,79 +1,97 @@
 from pathlib import Path
 
-from borb.pdf import Image, FixedColumnWidthTable, TableCell
+from borb.pdf import Image, FixedColumnWidthTable, TableCell, Page
 from borb.pdf.canvas.geometry.rectangle import Rectangle
 
 from tools.paragraph_style import *
 
 
-def page_head_bottom(page):
-    Image(
-        Path("../source/logo.jpg"),
-        width=Decimal(32),
-        height=Decimal(32),
-        horizontal_alignment=Alignment.LEFT,
-        vertical_alignment=Alignment.TOP
-    ).paint(page, Rectangle(Decimal(20),
-                            page.get_page_info().get_height() - Decimal(50),
-                            Decimal(100),
-                            Decimal(32)
-                            ))
+def page_head_bottom(pdf):
+    number_of_pages = int(pdf.get_document_info().get_number_of_pages())
 
-    Paragraph(
-        "DEPARTMENT OF HOMELAND SECURITY U.S. Customs and Border Protection",
-        font="Helvetica",
-        text_alignment=Alignment.CENTERED,
-        horizontal_alignment=Alignment.CENTERED,
-        vertical_alignment=Alignment.TOP,
-        font_size=Decimal(10)).paint(page, Rectangle(page.get_page_info().get_width() / 2 - Decimal(100),
-                                                     page.get_page_info().get_height() - Decimal(40),
-                                                     Decimal(200),
-                                                     Decimal(24)
-                                                     ))
-    Paragraph(
-        "ENTRY SUMMARY",
-        font="Helvetica-Bold",
-        text_alignment=Alignment.CENTERED,
-        horizontal_alignment=Alignment.CENTERED,
-        vertical_alignment=Alignment.TOP,
-        font_size=Decimal(12)).paint(page, Rectangle(page.get_page_info().get_width() / 2 - Decimal(60),
-                                                     page.get_page_info().get_height() - Decimal(70),
-                                                     Decimal(120),
-                                                     Decimal(24)
-                                                     ))
+    for index in range(0, number_of_pages):
+        page: Page = pdf.get_page(index)
 
-    Paragraph(
-        "OMB APPROVAL NO. 1651 - 0022 EXPIRATION DATE 01 / 31 / 2021",
-        font="Helvetica-Bold",
-        horizontal_alignment=Alignment.RIGHT,
-        vertical_alignment=Alignment.TOP,
-        font_size=Decimal(6)).paint(page, Rectangle(page.get_page_info().get_width() - Decimal(120),
-                                                    page.get_page_info().get_height() - Decimal(40),
-                                                    Decimal(100),
-                                                    Decimal(20)
-                                                    ))
+        Image(
+            Path("../source/logo.jpg"),
+            width=Decimal(32),
+            height=Decimal(32),
+            horizontal_alignment=Alignment.LEFT,
+            vertical_alignment=Alignment.TOP
+        ).paint(page, Rectangle(Decimal(20),
+                                page.get_page_info().get_height() - Decimal(50),
+                                Decimal(100),
+                                Decimal(32)
+                                ))
 
-    Paragraph(
-        "CBP Form 7501 (5/22)",
-        font_size=Decimal(8),
-        font="Helvetica-Bold",
-        horizontal_alignment=Alignment.LEFT,
-        vertical_alignment=Alignment.BOTTOM).paint(page, Rectangle(Decimal(20),
-                                                                   Decimal(10),
-                                                                   Decimal(100),
-                                                                   Decimal(20)
-                                                                   ))
+        if index < 1:
+            Paragraph(
+                "DEPARTMENT OF HOMELAND SECURITY U.S. Customs and Border Protection",
+                font="Helvetica",
+                text_alignment=Alignment.CENTERED,
+                horizontal_alignment=Alignment.CENTERED,
+                vertical_alignment=Alignment.TOP,
+                font_size=Decimal(10)).paint(page, Rectangle(page.get_page_info().get_width() / 2 - Decimal(100),
+                                                             page.get_page_info().get_height() - Decimal(40),
+                                                             Decimal(200),
+                                                             Decimal(24)
+                                                             ))
+            Paragraph(
+                "ENTRY SUMMARY",
+                font="Helvetica-Bold",
+                text_alignment=Alignment.CENTERED,
+                horizontal_alignment=Alignment.CENTERED,
+                vertical_alignment=Alignment.TOP,
+                font_size=Decimal(12)).paint(page, Rectangle(page.get_page_info().get_width() / 2 - Decimal(60),
+                                                             page.get_page_info().get_height() - Decimal(70),
+                                                             Decimal(120),
+                                                             Decimal(24)
+                                                             ))
 
-    Paragraph(
-        "Page 1 of 2",
-        font_size=Decimal(8),
-        font="Helvetica-Bold",
-        horizontal_alignment=Alignment.RIGHT,
-        vertical_alignment=Alignment.BOTTOM).paint(page, Rectangle(page.get_page_info().get_width() - Decimal(120),
-                                                                   Decimal(10),
-                                                                   Decimal(100),
-                                                                   Decimal(20)
-                                                                   ))
+            Paragraph(
+                "OMB APPROVAL NO. 1651 - 0022 EXPIRATION DATE 01 / 31 / 2021",
+                font="Helvetica-Bold",
+                horizontal_alignment=Alignment.RIGHT,
+                vertical_alignment=Alignment.TOP,
+                font_size=Decimal(6)).paint(page, Rectangle(page.get_page_info().get_width() - Decimal(120),
+                                                            page.get_page_info().get_height() - Decimal(40),
+                                                            Decimal(100),
+                                                            Decimal(20)
+                                                            ))
+        else:
+            Paragraph(
+                "ENTRY SUMMARY CONTINUATION SHEET",
+                font="Helvetica-bold",
+                text_alignment=Alignment.CENTERED,
+                horizontal_alignment=Alignment.CENTERED,
+                vertical_alignment=Alignment.TOP,
+                font_size=Decimal(9)).paint(page, Rectangle(page.get_page_info().get_width() / 2 - Decimal(100),
+                                                            page.get_page_info().get_height() - Decimal(55),
+                                                            Decimal(200),
+                                                            Decimal(24)
+                                                            ))
+
+        Paragraph(
+            "CBP Form 7501 (5/22)",
+            font_size=Decimal(8),
+            font="Helvetica-Bold",
+            horizontal_alignment=Alignment.LEFT,
+            vertical_alignment=Alignment.BOTTOM).paint(page, Rectangle(Decimal(20),
+                                                                       Decimal(10),
+                                                                       Decimal(100),
+                                                                       Decimal(20)
+                                                                       ))
+
+        Paragraph(
+            f"Page {index + 1} of {number_of_pages}",
+            font_size=Decimal(8),
+            font="Helvetica-Bold",
+            horizontal_alignment=Alignment.RIGHT,
+            vertical_alignment=Alignment.BOTTOM).paint(page, Rectangle(page.get_page_info().get_width() - Decimal(120),
+                                                                       Decimal(10),
+                                                                       Decimal(100),
+                                                                       Decimal(20)
+                                                                       ))
 
 
 def table_front_gen(json, layout):
@@ -82,8 +100,7 @@ def table_front_gen(json, layout):
         number_of_rows=1,
         number_of_columns=7,
         column_widths=[Decimal(4.6), Decimal(2.5), Decimal(2.9), Decimal(2.8), Decimal(2.2), Decimal(2.2),
-                       Decimal(2.8)],
-        padding_top=Decimal(50)
+                       Decimal(2.8)]
     )
 
     # set properties on all table cells
@@ -250,17 +267,14 @@ def table_bottom_gen(json, layout):
     )
 
     table_bottom.add(TableCell(
-        get_paragraph_def("Other Fee Summary(for Block 39)" + "\n", "Helvetica"),
+        get_paragraph_def("Other Fee Summary(for Block 39)", "Helvetica"),
         row_span=4
     ))
     table_bottom.add(TableCell(
         get_paragraph_def(
-            "35. Total Entered Value" +
-            "\n" +
-            "\n $ 11,397", "Helvetica"),
-        row_span=2
+            "35. Total Entered Value", "Helvetica"),
+        border_bottom=False
     ))
-
     table_bottom.add(TableCell(Paragraph(
         "   CBP USE ONLY",
         font_size=Decimal(12),
@@ -268,7 +282,6 @@ def table_bottom_gen(json, layout):
         respect_spaces_in_text=True,
         padding_top=Decimal(2),
         padding_left=Decimal(2),
-        padding_bottom=Decimal(3),
         padding_right=Decimal(2)
     ), column_span=2))
     table_bottom.add(Paragraph(
@@ -278,8 +291,12 @@ def table_bottom_gen(json, layout):
         respect_spaces_in_text=True,
         padding_top=Decimal(2),
         padding_left=Decimal(2),
-        padding_bottom=Decimal(3),
         padding_right=Decimal(2)))
+    table_bottom.add(TableCell(
+        get_paragraph_order_info(
+            "$ 11,397", "Helvetica"),
+        border_top=False
+    ))
     table_bottom.add(TableCell(
         get_paragraph_def("A. LIQ CODE", font="Helvetica"),
         row_span=2
@@ -294,10 +311,8 @@ def table_bottom_gen(json, layout):
     ))
     table_bottom.add(TableCell(
         get_paragraph_def(
-            "Total Other Fees" +
-            "\n" +
-            f"\n $ {json['totalOtherFees']}", "Helvetica"),
-        row_span=2
+            "Total Other Fees", "Helvetica"),
+        border_bottom=False
     ))
     table_bottom.add(TableCell(
         Paragraph(
@@ -305,6 +320,11 @@ def table_bottom_gen(json, layout):
             font_size=Decimal(9),
             font="Helvetica",
             horizontal_alignment=Alignment.RIGHT),
+        border_top=False
+    ))
+    table_bottom.add(TableCell(
+        get_paragraph_order_info(
+            f"$ {json['totalOtherFees']}", "Helvetica"),
         border_top=False
     ))
     table_bottom.add(TableCell(
@@ -327,11 +347,7 @@ def table_bottom_gen(json, layout):
         row_span=2
     ))
     table_bottom.add(TableCell(
-        Paragraph(
-            "",
-            font_size=Decimal(9),
-            font="Helvetica",
-            horizontal_alignment=Alignment.RIGHT),
+        get_paragraph_def("", font="Helvetica"),
         border_top=False
     ))
     table_bottom.add(TableCell(
@@ -351,7 +367,6 @@ def table_bottom_gen(json, layout):
         row_span=3,
         border_bottom=False
     ))
-
     table_bottom.add(TableCell(
         Paragraph(
             str(json['num39Other']),
@@ -392,7 +407,6 @@ def table_bottom_gen(json, layout):
         column_span=5,
         border_top=False
     ))
-
     table_bottom.add(TableCell(
         get_paragraph_def(
             "41. Declarant Name (Last, First, M.I.)       Title" +
