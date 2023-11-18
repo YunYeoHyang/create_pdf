@@ -1,10 +1,9 @@
 from borb.pdf import FixedColumnWidthTable
-from borb.pdf.canvas.geometry.rectangle import Rectangle
 
 from tools.paragraph_style import *
 
 
-def table_order_paragraph(page, json):
+def table_order_paragraph(json, layout):
     order_list: [] = json['productList']
 
     if len(order_list) < 3:
@@ -36,8 +35,4 @@ def table_order_paragraph(page, json):
                 "001",
                 "Helvetica"))
 
-        table_order.paint(page, Rectangle(Decimal(20),
-                                          page.get_page_info().get_height() - Decimal(394),
-                                          page.get_page_info().get_width() - Decimal(40),
-                                          Decimal(20)
-                                          ))
+        layout.add(table_order)

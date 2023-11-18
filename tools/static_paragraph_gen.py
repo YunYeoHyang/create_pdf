@@ -16,7 +16,7 @@ def page_head_bottom(page):
     ).paint(page, Rectangle(Decimal(20),
                             page.get_page_info().get_height() - Decimal(50),
                             Decimal(100),
-                            Decimal(20)
+                            Decimal(32)
                             ))
 
     Paragraph(
@@ -28,7 +28,7 @@ def page_head_bottom(page):
         font_size=Decimal(10)).paint(page, Rectangle(page.get_page_info().get_width() / 2 - Decimal(100),
                                                      page.get_page_info().get_height() - Decimal(40),
                                                      Decimal(200),
-                                                     Decimal(20)
+                                                     Decimal(24)
                                                      ))
     Paragraph(
         "ENTRY SUMMARY",
@@ -39,7 +39,7 @@ def page_head_bottom(page):
         font_size=Decimal(12)).paint(page, Rectangle(page.get_page_info().get_width() / 2 - Decimal(60),
                                                      page.get_page_info().get_height() - Decimal(70),
                                                      Decimal(120),
-                                                     Decimal(20)
+                                                     Decimal(24)
                                                      ))
 
     Paragraph(
@@ -76,14 +76,14 @@ def page_head_bottom(page):
                                                                    ))
 
 
-def table_front_gen(page, json):
+def table_front_gen(json, layout):
     # tableFront info setting
     table_front: FixedColumnWidthTable = FixedColumnWidthTable(
         number_of_rows=1,
         number_of_columns=7,
-        margin_top=Decimal(12),
         column_widths=[Decimal(4.6), Decimal(2.5), Decimal(2.9), Decimal(2.8), Decimal(2.2), Decimal(2.2),
                        Decimal(2.8)],
+        padding_top=Decimal(50)
     )
 
     # set properties on all table cells
@@ -97,14 +97,10 @@ def table_front_gen(page, json):
     table_front.add(get_paragraph_def("6. Port Code", "Helvetica"))
     table_front.add(get_paragraph_def("7. Entry Date" + "\n" + json['num7'], "Helvetica"))
 
-    table_front.paint(page, Rectangle(Decimal(20),
-                                      page.get_page_info().get_height() - Decimal(100),
-                                      page.get_page_info().get_width() - Decimal(40),
-                                      Decimal(20)
-                                      ))
+    layout.add(table_front)
 
 
-def table_middle1_gen(page, json):
+def table_middle1_gen(json, layout):
     # table_middle1 info setting
     table_middle1: FixedColumnWidthTable = FixedColumnWidthTable(
         number_of_rows=2,
@@ -121,14 +117,10 @@ def table_middle1_gen(page, json):
     table_middle1.add(get_paragraph_def("14. Exporting Country", "Helvetica"))
     table_middle1.add(get_paragraph_def("15. Export Date" + "\n" + json['num15'], "Helvetica"))
 
-    table_middle1.paint(page, Rectangle(Decimal(20),
-                                        page.get_page_info().get_height() - Decimal(129),
-                                        page.get_page_info().get_width() - Decimal(40),
-                                        Decimal(20)
-                                        ))
+    layout.add(table_middle1)
 
 
-def table_middle2_gen(page, json):
+def table_middle2_gen(json, layout):
     # table_middle2 info setting
     table_middle2: FixedColumnWidthTable = FixedColumnWidthTable(
         number_of_rows=1,
@@ -142,14 +134,10 @@ def table_middle2_gen(page, json):
     table_middle2.add(get_paragraph_def("19. Foreign Port of Lading" + "\n" + json['num19'], "Helvetica"))
     table_middle2.add(get_paragraph_def("20. U.S. Port of Unloading", "Helvetica"))
 
-    table_middle2.paint(page, Rectangle(Decimal(20),
-                                        page.get_page_info().get_height() - Decimal(186),
-                                        page.get_page_info().get_width() - Decimal(40),
-                                        Decimal(20)
-                                        ))
+    layout.add(table_middle2)
 
 
-def table_middle3_gen(page, json):
+def table_middle3_gen(json, layout):
     # table_middle3 info setting
     table_middle3: FixedColumnWidthTable = FixedColumnWidthTable(
         number_of_rows=2,
@@ -185,14 +173,10 @@ def table_middle3_gen(page, json):
                 "Helvetica"),
             column_span=2))
 
-    table_middle3.paint(page, Rectangle(Decimal(20),
-                                        page.get_page_info().get_height() - Decimal(215),
-                                        page.get_page_info().get_width() - Decimal(40),
-                                        Decimal(20)
-                                        ))
+    layout.add(table_middle3)
 
 
-def table_middle4_gen(page):
+def table_middle4_gen(layout):
     # table_middle4 info setting
     table_middle4: FixedColumnWidthTable = FixedColumnWidthTable(
         number_of_rows=2,
@@ -254,14 +238,10 @@ def table_middle4_gen(page):
         "Helvetica"
     ))
 
-    table_middle4.paint(page, Rectangle(Decimal(20),
-                                        page.get_page_info().get_height() - Decimal(326),
-                                        page.get_page_info().get_width() - Decimal(40),
-                                        Decimal(20)
-                                        ))
+    layout.add(table_middle4)
 
 
-def table_bottom_gen(page, json):
+def table_bottom_gen(json, layout):
     # table_bottom info setting
     table_bottom: FixedColumnWidthTable = FixedColumnWidthTable(
         number_of_rows=13,
@@ -456,8 +436,4 @@ def table_bottom_gen(page, json):
         border_top=False
     ))
 
-    table_bottom.paint(page, Rectangle(Decimal(20),
-                                       page.get_page_info().get_height() - Decimal(764),
-                                       page.get_page_info().get_width() - Decimal(40),
-                                       Decimal(280)
-                                       ))
+    layout.add(table_bottom)
