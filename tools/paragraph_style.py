@@ -11,9 +11,9 @@ def get_table_cell_title_def(value, font, column_span, row_span) -> TableCell:
             respect_newlines_in_text=True,
             respect_spaces_in_text=True,
             font_size=Decimal(9),
-            padding_top=Decimal(1),
+            padding_top=Decimal(1.3),
             padding_left=Decimal(1),
-            padding_right=Decimal(2)
+            padding_right=Decimal(2),
         ),
         border_bottom=False,
         border_width=Decimal(0.5),
@@ -33,7 +33,8 @@ def get_table_cell_content_def(value, font, column_span, row_span, horizontal_al
             font_size=Decimal(10),
             padding_left=Decimal(3),
             padding_bottom=Decimal(2),
-            padding_right=Decimal(2)
+            padding_right=Decimal(2),
+            fixed_leading=Decimal(0.9)
         ),
         border_top=False,
         border_width=Decimal(0.5),
@@ -52,6 +53,28 @@ def get_table_cell_def(value, font, font_size, column_span, row_span) -> TableCe
             font_size=Decimal(font_size),
             padding_top=Decimal(0.8),
             padding_left=Decimal(2),
+            fixed_leading=Decimal(0.9)
+        ),
+        border_width=Decimal(0.5),
+        column_span=column_span,
+        row_span=row_span
+    )
+
+
+def get_table_cell_center(value, font, font_size, column_span, row_span, vertical_alignment) -> TableCell:
+    return TableCell(
+        Paragraph(
+            value,
+            font=font,
+            respect_newlines_in_text=True,
+            respect_spaces_in_text=True,
+            text_alignment=Alignment.CENTERED,
+            horizontal_alignment=Alignment.CENTERED,
+            vertical_alignment=vertical_alignment,
+            font_size=Decimal(font_size),
+            padding_top=Decimal(0.8),
+            padding_left=Decimal(2),
+            fixed_leading=Decimal(0.9)
         ),
         border_width=Decimal(0.5),
         column_span=column_span,
@@ -83,31 +106,46 @@ def get_table_cell_att(value, font, padding_top, column_span, row_span, border_t
     )
 
 
-def get_paragraph_order_index(value, font) -> Paragraph:
-    return Paragraph(
-        value,
-        font=font,
-        respect_newlines_in_text=True,
-        respect_spaces_in_text=True,
-        text_alignment=Alignment.RIGHT,
-        horizontal_alignment=Alignment.RIGHT,
-        font_size=Decimal(10),
-        padding_top=Decimal(2),
-        padding_left=Decimal(2),
-        padding_bottom=Decimal(3),
-        padding_right=Decimal(2)
+def get_table_cell_order_index(value, font, column_span, row_span, border_top, border_bottom) -> TableCell:
+    return TableCell(
+        Paragraph(
+            value,
+            font=font,
+            respect_newlines_in_text=True,
+            respect_spaces_in_text=True,
+            text_alignment=Alignment.RIGHT,
+            horizontal_alignment=Alignment.RIGHT,
+            font_size=Decimal(10),
+            padding_top=Decimal(2),
+            padding_left=Decimal(2),
+            padding_bottom=Decimal(3),
+            padding_right=Decimal(2),
+        ),
+        border_top=border_top,
+        border_bottom=border_bottom,
+        border_width=Decimal(0.5),
+        column_span=column_span,
+        row_span=row_span,
     )
 
 
-def get_paragraph_order_info(value, font) -> Paragraph:
-    return Paragraph(
-        value,
-        font=font,
-        respect_newlines_in_text=True,
-        respect_spaces_in_text=True,
-        font_size=Decimal(10),
-        padding_top=Decimal(2),
-        padding_left=Decimal(2),
-        padding_bottom=Decimal(3),
-        padding_right=Decimal(2)
+def get_table_cell_order_info(value, font, column_span, row_span, border_top, border_bottom) -> TableCell:
+    return TableCell(
+        Paragraph(
+            value,
+            font=font,
+            respect_newlines_in_text=True,
+            respect_spaces_in_text=True,
+            font_size=Decimal(10),
+            padding_top=Decimal(2),
+            padding_left=Decimal(2),
+            padding_bottom=Decimal(3),
+            padding_right=Decimal(2),
+            fixed_leading=Decimal(0.9)
+        ),
+        border_top=border_top,
+        border_bottom=border_bottom,
+        border_width=Decimal(0.5),
+        column_span=column_span,
+        row_span=row_span,
     )
