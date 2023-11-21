@@ -12,12 +12,12 @@ class Layout(MultiColumnLayout):
         assert h is not None
         super().__init__(
             page=page,
-            column_widths=[w * Decimal(0.93)],
+            column_widths=[w * Decimal(0.915)],
             footer_paint_method=None,
             header_paint_method=None,
             inter_column_margins=[],
             margin_bottom=h * Decimal(0.02),
-            margin_left=w * Decimal(0.04),
-            margin_right=w * Decimal(0.04),
-            margin_top=h * Decimal(0.08),
+            margin_left=w * Decimal(0.042),
+            margin_right=w * Decimal(0.042),
+            margin_top=h * Decimal(0.078),
         )

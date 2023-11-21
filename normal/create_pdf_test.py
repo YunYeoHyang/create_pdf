@@ -14,7 +14,7 @@ if __name__ == '__main__':
         json = json.load(f)
 
     pdf = Document()
-    page = Page()
+    page = Page(width=Decimal(612), height=Decimal(792))
     pdf.add_page(page)
     layout: PageLayout = Layout(page)
 
