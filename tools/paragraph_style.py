@@ -129,13 +129,15 @@ def get_table_cell_order_index(value, font, column_span, row_span, border_top, b
     )
 
 
-def get_table_cell_order_info(value, font, column_span, row_span, border_top, border_bottom) -> TableCell:
+def get_table_cell_order_info(value, font, column_span, row_span, border_top, border_bottom, border_right, border_left,
+                              horizontal_alignment) -> TableCell:
     return TableCell(
         Paragraph(
             value,
             font=font,
             respect_newlines_in_text=True,
             respect_spaces_in_text=True,
+            horizontal_alignment=horizontal_alignment,
             font_size=Decimal(10),
             padding_top=Decimal(2),
             padding_left=Decimal(2),
@@ -145,6 +147,8 @@ def get_table_cell_order_info(value, font, column_span, row_span, border_top, bo
         ),
         border_top=border_top,
         border_bottom=border_bottom,
+        border_right=border_right,
+        border_left=border_left,
         border_width=Decimal(0.5),
         column_span=column_span,
         row_span=row_span,

@@ -40,7 +40,7 @@ if __name__ == '__main__':
 
     table_middle4_gen(table)
 
-    table_order_paragraph(table, json, layout)
+    table_order_paragraph(table, json, layout, page)
 
     page_head_bottom(pdf)
 

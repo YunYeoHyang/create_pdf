@@ -1,9 +1,20 @@
+import json
 from pathlib import Path
 
 from borb.pdf import Image, Page
 from borb.pdf.canvas.geometry.rectangle import Rectangle
 
 from tools.paragraph_style import *
+
+
+def check_json_for_key(j, key):
+    try:
+        if key in j:
+            return True
+        else:
+            return False
+    except json.JSONDecodeError:
+        return False
 
 
 def page_head_bottom(pdf):
@@ -96,7 +107,7 @@ def page_head_bottom(pdf):
                                                                        ))
 
 
-def table_front_gen(table, json):
+def table_front_gen(table, j):
     table.add(get_table_cell_title_def("1. Filer Code/Entry Number", "Helvetica", 2, 1))
     table.add(get_table_cell_title_def("2. Entry Type", "Helvetica", 3, 1))
     table.add(get_table_cell_title_def("3. Summary Date", "Helvetica", 3, 1))
@@ -104,36 +115,36 @@ def table_front_gen(table, json):
     table.add(get_table_cell_title_def("5. Bond Type", "Helvetica", 2, 1))
     table.add(get_table_cell_title_def("6. Port Code", "Helvetica", 2, 1))
     table.add(get_table_cell_title_def("7. Entry Date", "Helvetica", 2, 1))
-    table.add(get_table_cell_content_def(f"{json['num1']}", "Helvetica", 2, 1, Alignment.LEFT))
-    table.add(get_table_cell_content_def("", "Helvetica", 3, 1, Alignment.LEFT))
-    table.add(get_table_cell_content_def(f"{json['num3']}", "Helvetica", 3, 1, Alignment.LEFT))
-    table.add(get_table_cell_content_def("", "Helvetica", 2, 1, Alignment.LEFT))
-    table.add(get_table_cell_content_def("", "Helvetica", 2, 1, Alignment.LEFT))
-    table.add(get_table_cell_content_def("", "Helvetica", 2, 1, Alignment.LEFT))
-    table.add(get_table_cell_content_def(f"{json['num7']}", "Helvetica", 2, 1, Alignment.LEFT))
+    table.add(get_table_cell_content_def(f"{j['num1']}", "Helvetica", 2, 1, Alignment.LEFT))
+    table.add(get_table_cell_content_def("01   ABI/A", "Helvetica", 3, 1, Alignment.LEFT))
+    table.add(get_table_cell_content_def(f"{j['num3']}", "Helvetica", 3, 1, Alignment.LEFT))
+    table.add(get_table_cell_content_def(" 036", "Helvetica", 2, 1, Alignment.LEFT))
+    table.add(get_table_cell_content_def(" 8", "Helvetica", 2, 1, Alignment.LEFT))
+    table.add(get_table_cell_content_def(" 2704", "Helvetica", 2, 1, Alignment.LEFT))
+    table.add(get_table_cell_content_def(f"{j['num7']}", "Helvetica", 2, 1, Alignment.LEFT))
 
 
-def table_middle1_gen(table, json):
+def table_middle1_gen(table, j):
     table.add(get_table_cell_title_def("8. Importing Carrier", "Helvetica", 4, 1))
     table.add(get_table_cell_title_def("9. Mode of Transport", "Helvetica", 5, 1))
     table.add(get_table_cell_title_def("10. Country of Origin", "Helvetica", 5, 1))
     table.add(get_table_cell_title_def("11. Import Date", "Helvetica", 2, 1))
-    table.add(get_table_cell_content_def(f"{json['num8']}", "Helvetica", 4, 1, Alignment.LEFT))
-    table.add(get_table_cell_content_def("", "Helvetica", 5, 1, Alignment.LEFT))
-    table.add(get_table_cell_content_def("", "Helvetica", 5, 1, Alignment.LEFT))
-    table.add(get_table_cell_content_def(f"{json['num11']}", "Helvetica", 2, 1, Alignment.LEFT))
+    table.add(get_table_cell_content_def(f"{j['num8']}", "Helvetica", 4, 1, Alignment.LEFT))
+    table.add(get_table_cell_content_def(" 11", "Helvetica", 5, 1, Alignment.LEFT))
+    table.add(get_table_cell_content_def("CN", "Helvetica", 5, 1, Alignment.LEFT))
+    table.add(get_table_cell_content_def(f"{j['num11']}", "Helvetica", 2, 1, Alignment.LEFT))
 
     table.add(get_table_cell_title_def("12. B/L or AWB Number", "Helvetica", 4, 1))
     table.add(get_table_cell_title_def("13. Manufacturer ID", "Helvetica", 5, 1))
     table.add(get_table_cell_title_def("14. Exporting Country", "Helvetica", 5, 1))
     table.add(get_table_cell_title_def("15. Export Date", "Helvetica", 2, 1))
-    table.add(get_table_cell_content_def(f"{json['num12']}", "Helvetica", 4, 1, Alignment.LEFT))
-    table.add(get_table_cell_content_def(f"{json['num13']}", "Helvetica", 5, 1, Alignment.LEFT))
-    table.add(get_table_cell_content_def("", "Helvetica", 5, 1, Alignment.LEFT))
-    table.add(get_table_cell_content_def(f"{json['num15']}", "Helvetica", 2, 1, Alignment.LEFT))
+    table.add(get_table_cell_content_def(f"{j['num12']}", "Helvetica", 4, 1, Alignment.LEFT))
+    table.add(get_table_cell_content_def(f"{j['num13']}", "Helvetica", 5, 1, Alignment.RIGHT))
+    table.add(get_table_cell_content_def("CN", "Helvetica", 5, 1, Alignment.LEFT))
+    table.add(get_table_cell_content_def(f"{j['num15']}", "Helvetica", 2, 1, Alignment.LEFT))
 
 
-def table_middle2_gen(table, json):
+def table_middle2_gen(table, j):
     table.add(get_table_cell_title_def("16. I.T. Number", "Helvetica", 2, 1))
     table.add(get_table_cell_title_def("17. I.T. Date", "Helvetica", 4, 1))
     table.add(get_table_cell_title_def("18. Missing Docs", "Helvetica", 3, 1))
@@ -143,18 +154,18 @@ def table_middle2_gen(table, json):
     table.add(get_table_cell_content_def("", "Helvetica", 2, 1, Alignment.LEFT))
     table.add(get_table_cell_content_def("", "Helvetica", 4, 1, Alignment.LEFT))
     table.add(get_table_cell_content_def("", "Helvetica", 3, 1, Alignment.LEFT))
-    table.add(get_table_cell_content_def(f"{json['num19']}", "Helvetica", 4, 1, Alignment.LEFT))
-    table.add(get_table_cell_content_def("", "Helvetica", 3, 1, Alignment.LEFT))
+    table.add(get_table_cell_content_def(f"{j['num19']}", "Helvetica", 4, 1, Alignment.LEFT))
+    table.add(get_table_cell_content_def("2709", "Helvetica", 3, 1, Alignment.LEFT))
 
 
-def table_middle3_gen(table, json):
+def table_middle3_gen(table, j):
     table.add(get_table_cell_title_def("21. Location of Goods/G.O. Number", "Helvetica", 3, 1))
     table.add(get_table_cell_title_def("22. Consignee Number", "Helvetica", 6, 1))
     table.add(get_table_cell_title_def("23. Importer Number", "Helvetica", 4, 1))
     table.add(get_table_cell_title_def("24. Reference Number", "Helvetica", 3, 1))
-    table.add(get_table_cell_content_def("", "Helvetica", 3, 1, Alignment.LEFT))
-    table.add(get_table_cell_content_def("", "Helvetica", 6, 1, Alignment.LEFT))
-    table.add(get_table_cell_content_def("", "Helvetica", 4, 1, Alignment.LEFT))
+    table.add(get_table_cell_content_def("Z666 Voyage: 0399", "Helvetica", 3, 1, Alignment.LEFT))
+    table.add(get_table_cell_content_def("87-432023400", "Helvetica", 6, 1, Alignment.LEFT))
+    table.add(get_table_cell_content_def("87-432023400", "Helvetica", 4, 1, Alignment.LEFT))
     table.add(get_table_cell_content_def("", "Helvetica", 3, 1, Alignment.LEFT))
 
     table.add(get_table_cell_title_def("25. Ultimate Consignee Name (Last, First, M.I.) and Address",
@@ -162,20 +173,21 @@ def table_middle3_gen(table, json):
     table.add(get_table_cell_title_def("26. Importer of Record Name(Last, First, M.I.) and Address",
                                        "Helvetica", 7, 1))
     table.add(get_table_cell_content_def(
-        f"{json['num25']}" +
-        f"\nStreet: {json['num25street']}" +
-        f"\n{json['num25st']}\n" +
-        f"\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
-        f"CustomerReference # {json['num25customerReference']}" +
-        f"\nCity: {json['num25city']}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
-        f"State: {json['num25state']}   Zip: {json['num25zip']}",
+        f"{j['num25']}" +
+        f"\nStreet: {j['num25street']}" +
+        f"\n{j['num25st']}\n" +
+        f"\nDestination: CA\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+        (f"CustomerReference # {j['num25customerReference']}" if check_json_for_key(j, 'num25customerReference')
+         else "") +
+        f"\nCity: {j['num25city']}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+        f"State: {j['num25state']}   Zip: {j['num25zip']}",
         "Helvetica", 9, 1, Alignment.LEFT))
     table.add(get_table_cell_content_def(
-        f"{json['num26']}" +
-        f"\nStreet: {json['num26street']}" +
-        f"\n{json['num26st']}\n\n" +
-        f"\nCity: {json['num26city']}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
-        f"State: {json['num26state']}   Zip: {json['num26zip']}",
+        f"{j['num26']}" +
+        f"\nStreet: {j['num26street']}" +
+        f"\n{j['num26st']}\n\n" +
+        f"\nCity: {j['num26city']}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+        f"State: {j['num26state']}   Zip: {j['num26zip']}",
         "Helvetica", 7, 1, Alignment.LEFT))
 
 
@@ -217,7 +229,55 @@ def table_middle4_gen(table):
         "Helvetica", 9, 2, 1, Alignment.TOP))
 
 
-def table_bottom_gen(table, json):
+def table_bottom_gen(table, j, page):
+    Image(
+        Path("../source/image1.jpg"),
+        width=Decimal(14),
+        height=Decimal(14),
+        horizontal_alignment=Alignment.LEFT,
+        vertical_alignment=Alignment.TOP
+    ).paint(page, Rectangle(Decimal(109),
+                            page.get_page_info().get_height() - Decimal(596.5),
+                            Decimal(21),
+                            Decimal(21)
+                            ))
+
+    Image(
+        Path("../source/image2.jpg"),
+        width=Decimal(14),
+        height=Decimal(14),
+        horizontal_alignment=Alignment.LEFT,
+        vertical_alignment=Alignment.TOP
+    ).paint(page, Rectangle(Decimal(266.5),
+                            page.get_page_info().get_height() - Decimal(611),
+                            Decimal(21),
+                            Decimal(21)
+                            ))
+
+    Image(
+        Path("../source/image2.jpg"),
+        width=Decimal(14),
+        height=Decimal(14),
+        horizontal_alignment=Alignment.LEFT,
+        vertical_alignment=Alignment.TOP
+    ).paint(page, Rectangle(Decimal(275),
+                            page.get_page_info().get_height() - Decimal(628),
+                            Decimal(21),
+                            Decimal(21)
+                            ))
+
+    Image(
+        Path("../source/image1.jpg"),
+        width=Decimal(14),
+        height=Decimal(14),
+        horizontal_alignment=Alignment.LEFT,
+        vertical_alignment=Alignment.TOP
+    ).paint(page, Rectangle(Decimal(186),
+                            page.get_page_info().get_height() - Decimal(644),
+                            Decimal(21),
+                            Decimal(21)
+                            ))
+
     table.add(get_table_cell_def("Other Fee Summary(for Block 39)", "Helvetica", 9, 3, 4))
     table.add(get_table_cell_title_def("35. Total Entered Value", "Helvetica", 6, 1))
     table.add(get_table_cell_def("   CBP USE ONLY", "Helvetica-Bold", 12, 5, 1))
@@ -227,8 +287,8 @@ def table_bottom_gen(table, json):
     table.add(get_table_cell_def("B. Ascertained Duty", "Helvetica", 9, 3, 2))
     table.add(get_table_cell_title_def("37. Duty", "Helvetica", 2, 1))
     table.add(get_table_cell_title_def("Total Other Fees", "Helvetica", 6, 1))
-    table.add(get_table_cell_content_def(f"$ {json['num37Duty']}", "Helvetica", 2, 1, Alignment.RIGHT))
-    table.add(get_table_cell_content_def(f"$ {json['totalOtherFees']}", "Helvetica", 6, 1, Alignment.LEFT))
+    table.add(get_table_cell_content_def(f"$ {j['num37Duty']}", "Helvetica", 2, 1, Alignment.RIGHT))
+    table.add(get_table_cell_content_def(f"$ {j['totalOtherFees']}", "Helvetica", 6, 1, Alignment.LEFT))
     table.add(get_table_cell_def("REASON CODE", "Helvetica", 9, 2, 6))
     table.add(get_table_cell_def("C. Ascertained Tax", "Helvetica", 9, 3, 2))
     table.add(get_table_cell_title_def("38. Tax", "Helvetica", 2, 1))
@@ -239,17 +299,17 @@ def table_bottom_gen(table, json):
     table.add(get_table_cell_def("D. Ascertained Other", "Helvetica", 9, 3, 2))
     table.add(get_table_cell_title_def("39. Other", "Helvetica", 2, 1))
     table.add(get_table_cell_att(
-        "I declare that I am the Importer of record and that the actual owner," +
-        "purchaser, or consignee for CBP purposes is as shown above, OR owner",
+        "I declare that I am the         Importer of record and that the actual owner, " +
+        "purchaser, or consignee for CBP purposes is as shown above, OR         owner",
         "Helvetica", 8, 9, 3, True, False))
-    table.add(get_table_cell_content_def(f"$ {json['num39Other']}", "Helvetica", 2, 1, Alignment.RIGHT))
+    table.add(get_table_cell_content_def(f"$ {j['num39Other']}", "Helvetica", 2, 1, Alignment.RIGHT))
     table.add(get_table_cell_def("D. Ascertained Total", "Helvetica", 9, 3, 2))
     table.add(get_table_cell_title_def("40. Total", "Helvetica", 2, 1))
-    table.add(get_table_cell_content_def(f"$ {json['num40Total']}", "Helvetica", 2, 1, Alignment.RIGHT))
+    table.add(get_table_cell_content_def(f"$ {j['num40Total']}", "Helvetica", 2, 1, Alignment.RIGHT))
     table.add(get_table_cell_att(
-        "or purchaser or agent thereof.  I further declare that the merchandise was " +
+        "or purchaser or agent thereof.  I further declare that the merchandise         was " +
         "obtained pursuant to a purchase or agreement to purchase and that the" +
-        "\n prices set forth in the invoices are true, OR " +
+        "\n prices set forth in the invoices are true, OR         " +
         "was not obtained pursuant to a purchase or agreement to purchase and the statements in the invoices as" +
         "\n to value or price are true to the best of my knowledge and belief.  " +
         "I also declare that the statements in the documents herein filed fully disclose to the best of my " +
