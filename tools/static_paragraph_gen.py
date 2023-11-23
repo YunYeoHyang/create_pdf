@@ -1,20 +1,10 @@
-import json
 from pathlib import Path
 
 from borb.pdf import Image, Page
 from borb.pdf.canvas.geometry.rectangle import Rectangle
 
+from tools.data_tools import check_json_for_key
 from tools.paragraph_style import *
-
-
-def check_json_for_key(j, key):
-    try:
-        if key in j:
-            return True
-        else:
-            return False
-    except json.JSONDecodeError:
-        return False
 
 
 def page_head_bottom(pdf):
@@ -176,17 +166,17 @@ def table_middle3_gen(table, j):
         f"{j['num25']}" +
         f"\nStreet: {j['num25street']}" +
         f"\n{j['num25st']}\n" +
-        f"\nDestination: CA\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+        f"\nDestination: CA\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
         (f"CustomerReference # {j['num25customerReference']}" if check_json_for_key(j, 'num25customerReference')
          else "") +
-        f"\nCity: {j['num25city']}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+        f"\nCity: {j['num25city']}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
         f"State: {j['num25state']}   Zip: {j['num25zip']}",
         "Helvetica", 9, 1, Alignment.LEFT))
     table.add(get_table_cell_content_def(
         f"{j['num26']}" +
         f"\nStreet: {j['num26street']}" +
         f"\n{j['num26st']}\n\n" +
-        f"\nCity: {j['num26city']}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+        f"\nCity: {j['num26city']}\t\t\t\t" +
         f"State: {j['num26state']}   Zip: {j['num26zip']}",
         "Helvetica", 7, 1, Alignment.LEFT))
 

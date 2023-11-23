@@ -10,7 +10,7 @@ from tools.static_paragraph_gen import *
 
 if __name__ == '__main__':
     # testInfo form json
-    with open("../source/response.json", "r", encoding="utf-8") as f:
+    with open("../source/response1.json", "r", encoding="utf-8") as f:
         json = json.load(f)
 
     pdf = Document()
@@ -19,7 +19,7 @@ if __name__ == '__main__':
     layout: PageLayout = Layout(page)
 
     table: FixedColumnWidthTable = FixedColumnWidthTable(
-        number_of_rows=29,
+        number_of_rows=41,
         number_of_columns=16,
         column_widths=[
             Decimal(0.75), Decimal(1.8), Decimal(0.6),
@@ -40,7 +40,7 @@ if __name__ == '__main__':
 
     table_middle4_gen(table)
 
-    table_order_paragraph(table, json, layout, page)
+    table_order_paragraph(table, json, layout, page, pdf)
 
     page_head_bottom(pdf)
 

@@ -32,7 +32,7 @@ def get_table_cell_content_def(value, font, column_span, row_span, horizontal_al
             horizontal_alignment=horizontal_alignment,
             font_size=Decimal(10),
             padding_left=Decimal(3),
-            padding_bottom=Decimal(2),
+            padding_bottom=Decimal(1.6),
             padding_right=Decimal(2),
             fixed_leading=Decimal(0.9)
         ),

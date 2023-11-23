@@ -1,97 +1,200 @@
 {
-	"num1": "9VB-0150321-6",
-	"num3": "07/24/23",
-	"num7": "07/13/23",
-	"num8": "COSCO SHIPPING JASMI",
-	"num11": "07/13/23",
-	"num12": "COSU 6358551774, SZX23060067",
-	"num13": "CNSHEJIA9CIT",
-	"num15": "2007/6/23",
-	"num19": "57078",
-	"num25": "NEW HEART TRADING COMPANY",
-	"num25street": "422 26TH ST",
-	"num25st": "ST111",
-	"num25city": "GREELEY",
-	"num25customerReference": "CNLA329805",
-	"num25state": "CO",
-	"num25zip": "80631-8425",
-	"num26": "NEW HEART TRADING COMPANY",
-	"num26street": "422 26TH ST",
-	"num26st": "ST26",
-	"num26city": "GREELEY",
-	"num26state": "CO",
-	"num26zip": "80631-8425",
-	"totalsForInvoice": "CBHU7092612",
+	"num1": "9VB-0159662-4",
+	"num3": "09/19/23",
+	"num4": null,
+	"num7": "09/10/23",
+	"num8": "MATSONIA",
+	"num11": "09/10/23",
+	"num12": "MATS 2123407000, LHA23080374",
+	"num13": "CNSHEYI1806SHE",
+	"num15": "09/04/23",
+	"num19": "57035",
+	"num21": "Z773 Voyage: 045",
+	"num22": "38-4241801",
+	"num23": "38-4241801",
+	"num25": "NEW CREATION INC",
+	"num25street": "17128 COLIMA RD",
+	"num25st": "1883",
+	"num25city": "HACIENDA HEIGHTS",
+	"num25customerReference": "# CNLA339612",
+	"num25state": "CA",
+	"num25zip": "91745-6769",
+	"num26": "NEW CREATION INC",
+	"num26street": "17128 COLIMA RD",
+	"num26st": "1883",
+	"num26city": "HACIENDA HEIGHTS",
+	"num26state": "CA",
+	"num26zip": "91745-6769",
 	"productList": [
 		{
-			"adacvdRate": "ARTICLE OF CHINA,US NTE 20(F)",
-			"adcvdNo": "9903.88.03",
-			"htsusDepict": "WALLETS CIG.CASES ETC: LEATHER",
-			"htsusNo": "4202.31.6000",
-			"manifestQty": 2500,
-			"grossWeight": 2411,
-			"ctncount": 221,
-			"unitpriceusd": 0.6,
-			"htsusRate": 0.25,
-			"htsusRate2": 0.08,
-			"kg1": "1000",
-			"kg2": "2000",
-			"netQuantityIn": 2190,
-			"totalValue": 1500,
-			"dutyAndIrTax": 375,
-			"dutyAndIrTax2": 120,
-			"merchandiseProcessingFee": 5.2,
-			"harborMaintenanceFee": 1.88
+			"pd1": {
+				"info": [
+					{
+						"adacvdRate": "FURNG ART:OTH:N/KNIT,WOOL,FOLK2",
+						"adcvdNo": "6304.99.1000",
+						"kg1": null
+					},
+					{
+						"htsusDepict": "FURNG ART:OTH:N/KNIT,WOOL,FOLK2",
+						"htsusNo": "6304.99.1000",
+						"kg2": "2764.68"
+					}
+				],
+				"manifestQty": 1390,
+				"manifestQtyShow": true,
+				"netQuantityIn": 630.3,
+				"netQuantityInShow": true
+			},
+			"pd2": {
+				"totalValue": 931.3,
+				"moneyC": 866
+			},
+			"pd3": {
+				"htsusRate": "FREE",
+				"htsusRate2": "0.053",
+				"valuedOver": 0.075,
+				"valuedOverUnit": "per NO",
+				"cottonFee": 0.00494,
+				"cottonFeeUnit": "per NO"
+			},
+			"pd4": {
+				"dutyAndIrTax": 0.0,
+				"dutyAndIrTax2": 104.25,
+				"cottonFeeResult": 6.87,
+				"merchandiseProcessingFee": 3.23,
+				"harborMaintenanceFee": 1.16
+			}
 		},
 		{
-			"adacvdRate": "ARTICLE OF CHINA,US NTE 20(F)1",
-			"adcvdNo": "9903.88.04",
-			"htsusDepict": "WALLETS CIG.CASES ETC: LEATHER",
-			"htsusNo": "4202.31.6000",
-			"manifestQty": 2500,
-			"grossWeight": 2411,
-			"ctncount": 221,
-			"unitpriceusd": 0.7,
-			"htsusRate": 0.25,
-			"htsusRate2": 0.08,
-			"kg1": "1000",
-			"kg2": "2000",
-			"netQuantityIn": 2190,
-			"totalValue": 1750,
-			"dutyAndIrTax": 437.5,
-			"dutyAndIrTax2": 140,
-			"merchandiseProcessingFee": 6.06,
-			"harborMaintenanceFee": 2.19
+			"pd1": {
+				"info": [
+					{
+						"adacvdRate": "FURNG ART:OTH:N/KNIT,WOOL,FOLK2",
+						"adcvdNo": "6304.99.1000",
+						"kg1": null
+					},
+					{
+						"htsusDepict": "FURNG ART:OTH:N/KNIT,WOOL,FOLK2",
+						"htsusNo": "6304.99.1000",
+						"kg2": "2764.68"
+					}
+				],
+				"manifestQty": 1390,
+				"manifestQtyShow": true,
+				"netQuantityIn": 630.3,
+				"netQuantityInShow": true
+			},
+			"pd2": {
+				"totalValue": 931.3,
+				"moneyC": 866
+			},
+			"pd3": {
+				"htsusRate": "0.25",
+				"htsusRate2": "0.053",
+				"valuedOver": 0.075,
+				"valuedOverUnit": "per NO",
+				"cottonFee": 0.00494,
+				"cottonFeeUnit": "per NO"
+			},
+			"pd4": {
+				"dutyAndIrTax": 0.0,
+				"dutyAndIrTax2": 104.25,
+				"cottonFeeResult": 6.87,
+				"merchandiseProcessingFee": 3.23,
+				"harborMaintenanceFee": 1.16
+			}
 		},
 		{
-			"adacvdRate": "ARTICLE OF CHINA,US NTE 20(F)2",
-			"adcvdNo": "9903.88.05",
-			"htsusDepict": "WALLETS CIG.CASES ETC: LEATHER",
-			"htsusNo": "4202.31.6000",
-			"manifestQty": 2500,
-			"grossWeight": 2411,
-			"ctncount": 221,
-			"unitpriceusd": 0.8,
-			"htsusRate": 0.25,
-			"htsusRate2": null,
-			"kg1": "1000",
-			"kg2": null,
-			"netQuantityIn": 2190,
-			"totalValue": 2000,
-			"dutyAndIrTax": 500,
-			"dutyAndIrTax2": 0,
-			"merchandiseProcessingFee": 6.93,
-			"harborMaintenanceFee": 2.5
+			"pd1": {
+				"info": [
+					{
+						"adacvdRate": "FURNG ART:OTH:N/KNIT,WOOL,FOLK2",
+						"adcvdNo": "6304.99.1000",
+						"kg1": null
+					},
+					{
+						"htsusDepict": "FURNG ART:OTH:N/KNIT,WOOL,FOLK2",
+						"htsusNo": "6304.99.1000",
+						"kg2": "2764.68"
+					}
+				],
+				"manifestQty": 1390,
+				"manifestQtyShow": true,
+				"netQuantityIn": 630.3,
+				"netQuantityInShow": true
+			},
+			"pd2": {
+				"totalValue": 931.3,
+				"moneyC": 866
+			},
+			"pd3": {
+				"htsusRate": "0.25",
+				"htsusRate2": "0.053",
+				"valuedOver": 0.075,
+				"valuedOverUnit": "per NO",
+				"cottonFee": 0.00494,
+				"cottonFeeUnit": "per NO"
+			},
+			"pd4": {
+				"dutyAndIrTax": 0.0,
+				"dutyAndIrTax2": 104.25,
+				"cottonFeeResult": 6.87,
+				"merchandiseProcessingFee": 3.23,
+				"harborMaintenanceFee": 1.16
+			}
+		},
+		{
+			"pd1": {
+				"info": [
+					{
+						"adacvdRate": "FURNG ART:OTH:N/KNIT,WOOL,FOLK2",
+						"adcvdNo": "6304.99.1000",
+						"kg1": null
+					},
+					{
+						"htsusDepict": "FURNG ART:OTH:N/KNIT,WOOL,FOLK2",
+						"htsusNo": "6304.99.1000",
+						"kg2": "2764.68"
+					}
+				],
+				"manifestQty": 1390,
+				"manifestQtyShow": true,
+				"netQuantityIn": 630.3,
+				"netQuantityInShow": true
+			},
+			"pd2": {
+				"totalValue": 931.3,
+				"moneyC": 866
+			},
+			"pd3": {
+				"htsusRate": "0.25",
+				"htsusRate2": "0.053",
+				"valuedOver": 0.075,
+				"valuedOverUnit": "per NO",
+				"cottonFee": 0.00494,
+				"cottonFeeUnit": "per NO"
+			},
+			"pd4": {
+				"dutyAndIrTax": 0.0,
+				"dutyAndIrTax2": 104.25,
+				"cottonFeeResult": 6.87,
+				"merchandiseProcessingFee": 3.23,
+				"harborMaintenanceFee": 1.16
+			}
 		}
 	],
-	"pkgs": 663,
-	"mpf": 18.19,
-	"hmf": 6.57,
-	"num35TotalEnteredValue": 5250,
-	"totalOtherFees": 24.76,
-	"num37Duty": 1572.5,
-	"num39Other": 24.76,
-	"num40Total": 1597.26,
-	"invoiceValue": 5250,
-	"enteredValue": 5250
+	"pkgs": 254,
+	"totalCottonFee": 13.74,
+	"mpf": 29.66,
+	"hmf": 2.32,
+	"num35TotalEnteredValue": 1862,
+	"totalOtherFees": 45.72,
+	"num37Duty": 208.5,
+	"num39Other": 45.72,
+	"num40Total": 254.22,
+	"totalsForInvoice": "BMOU4315076",
+	"invoiceValue": 1862.6,
+	"enteredValue": 1862.6,
+	"dottedIgnore": false,
+	"productTwoShowInPageTow": true
 }
