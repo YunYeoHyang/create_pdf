@@ -10,7 +10,7 @@ from tools.static_paragraph_gen import *
 
 if __name__ == '__main__':
     # testInfo form json
-    with open("../source/response1.json", "r", encoding="utf-8") as f:
+    with open("../source/response.json", "r", encoding="utf-8") as f:
         json = json.load(f)
 
     pdf = Document()

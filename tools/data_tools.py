@@ -4,7 +4,7 @@ import json
 def trans_json_for_key(j, key):
     try:
         if key in j:
-            if key == "htsusRate" or key == "htsusRate2":
+            if key.startswith('htsusRate'):
                 try:
                     return f"{float(j[key]) * 100}%"
                 except ValueError:

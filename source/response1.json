@@ -30,14 +30,14 @@
 			"pd1": {
 				"info": [
 					{
-						"adacvdRate": "FURNG ART:OTH:N/KNIT,WOOL,FOLK2",
-						"adcvdNo": "6304.99.1000",
-						"kg1": null
+						"infoField1": "FURNG ART:OTH:N/KNIT,WOOL,FOLK2",
+						"infoField2": "6304.99.1000",
+						"infoField3": null
 					},
 					{
-						"htsusDepict": "FURNG ART:OTH:N/KNIT,WOOL,FOLK2",
-						"htsusNo": "6304.99.1000",
-						"kg2": "2764.68"
+						"infoField1": "FURNG ART:OTH:N/KNIT,WOOL,FOLK2",
+						"infoField2": "6304.99.1000",
+						"infoField3": "2764.68"
 					}
 				],
 				"manifestQty": 1390,
@@ -50,14 +50,14 @@
 				"moneyC": 866
 			},
 			"pd3": {
-				"htsusRate": "0.25",
+				"htsusRate1": "0.25",
 				"htsusRate2": "FREE",
 				"valuedOver": 0.075,
 				"cottonFee": 0.00494,
 				"cottonFeeUnit": "per NO"
 			},
 			"pd4": {
-				"dutyAndIrTax": 0.0,
+				"dutyAndIrTax1": 0.0,
 				"dutyAndIrTax2": 104.25,
 				"cottonFeeResult": 6.87,
 				"merchandiseProcessingFee": 3.23,
