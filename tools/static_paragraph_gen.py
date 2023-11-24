@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from borb.pdf import Image, Page
@@ -5,6 +6,8 @@ from borb.pdf.canvas.geometry.rectangle import Rectangle
 
 from tools.data_tools import check_json_for_key
 from tools.paragraph_style import *
+
+root_dir = os.path.dirname(__file__)
 
 
 def page_head_bottom(pdf):
@@ -14,7 +17,7 @@ def page_head_bottom(pdf):
         page: Page = pdf.get_page(index)
 
         Image(
-            Path("../source/logo.jpg"),
+            Path(f"{root_dir}/../source/logo.jpg"),
             width=Decimal(33.7),
             height=Decimal(33.7),
             horizontal_alignment=Alignment.LEFT,
@@ -221,7 +224,7 @@ def table_middle4_gen(table):
 
 def table_bottom_gen(table, j, page):
     Image(
-        Path("../source/image1.jpg"),
+        Path(f"{root_dir}/../source/image1.jpg"),
         width=Decimal(14),
         height=Decimal(14),
         horizontal_alignment=Alignment.LEFT,
@@ -233,7 +236,7 @@ def table_bottom_gen(table, j, page):
                             ))
 
     Image(
-        Path("../source/image2.jpg"),
+        Path(f"{root_dir}/../source/image2.jpg"),
         width=Decimal(14),
         height=Decimal(14),
         horizontal_alignment=Alignment.LEFT,
@@ -245,7 +248,7 @@ def table_bottom_gen(table, j, page):
                             ))
 
     Image(
-        Path("../source/image2.jpg"),
+        Path(f"{root_dir}/../source/image2.jpg"),
         width=Decimal(14),
         height=Decimal(14),
         horizontal_alignment=Alignment.LEFT,
@@ -257,7 +260,7 @@ def table_bottom_gen(table, j, page):
                             ))
 
     Image(
-        Path("../source/image1.jpg"),
+        Path(f"{root_dir}/../source/image1.jpg"),
         width=Decimal(14),
         height=Decimal(14),
         horizontal_alignment=Alignment.LEFT,

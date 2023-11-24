@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from borb.pdf import FixedColumnWidthTable, Image, Page, PageLayout
@@ -7,6 +8,8 @@ from tools.data_tools import *
 from tools.layout import Layout
 from tools.paragraph_style import *
 from tools.static_paragraph_gen import table_bottom_gen, table_middle4_gen, check_json_for_key
+
+root_dir = os.path.dirname(__file__)
 
 
 def table_order_paragraph(table, j, layout, page, pdf):
@@ -118,7 +121,7 @@ def table_order_paragraph_gen(i, row_number, data, table, j, page, is_first, bor
                                          "Helvetica", 2, 1, False, border_bottom, True, True, Alignment.RIGHT))
 
     Image(
-        Path("../source/line.jpg"),
+        Path(f"{root_dir}/../source/line.jpg"),
         width=Decimal(560),
         height=Decimal(2),
         horizontal_alignment=Alignment.LEFT,
@@ -258,7 +261,7 @@ def get_table_cell_order_info1(value, font, column_span, row_span, border_top, b
 
 def draw_line_for_self_style(page):
     Image(
-        Path("../source/line.jpg"),
+        Path(f"{root_dir}/../source/line.jpg"),
         width=Decimal(560),
         height=Decimal(2),
         horizontal_alignment=Alignment.LEFT,

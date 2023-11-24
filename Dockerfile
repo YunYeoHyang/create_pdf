@@ -10,4 +10,4 @@ WORKDIR /app
 
 RUN pip install --no-cache-dir -i https://mirrors.aliyun.com/pypi/simple -r requirements.txt
 
-CMD ["python","-W","ignore", "grpc_server.py"]
+CMD ["python","-W","ignore", "main.py"]
