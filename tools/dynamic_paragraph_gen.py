@@ -21,7 +21,7 @@ def table_order_paragraph(table, j, layout, page, pdf):
         row_number += 1
 
     table_order_paragraph_gen(0, row_number, order_list[0], table, j, page, True, False, 337)
-    table_total_paragraph_gen(table, j, 14 - row_number, False)
+    table_total_paragraph_gen(table, j, 14 - row_number, len(order_list) == 1, False, page)
     table_bottom_gen(table, j, page)
     layout.add(table)
 
@@ -120,17 +120,7 @@ def table_order_paragraph_gen(i, row_number, data, table, j, page, is_first, bor
     table.add(get_table_cell_order_info(f"${data['pd4']['harborMaintenanceFee']}",
                                         "Helvetica", 2, 1, False, border_bottom, True, True, Alignment.RIGHT))
 
-    Image(
-        Path(f"{root_dir}/../source/line.jpg"),
-        width=Decimal(560),
-        height=Decimal(2),
-        horizontal_alignment=Alignment.LEFT,
-        vertical_alignment=Alignment.TOP
-    ).paint(page, Rectangle(Decimal(25.704),
-                            page.get_page_info().get_height() - Decimal(height) - Decimal(row_number * 11.3),
-                            Decimal(560),
-                            Decimal(2)
-                            ))
+    draw_line_for_self_style(page, 1, height, row_number)
 
 
 def table_more_orders_paragraph_gen(i, order_list, j, pdf, is_pass):
@@ -152,8 +142,8 @@ def table_more_orders_paragraph_gen(i, order_list, j, pdf, is_pass):
 
     table_middle4_gen(t)
 
-    height = 26.15
-    row_active_order_number = 55
+    height = 27.25
+    row_active_order_number = 56
     for index in range(len(order_list)):
         if index == 0 and is_pass:
             continue
@@ -163,41 +153,39 @@ def table_more_orders_paragraph_gen(i, order_list, j, pdf, is_pass):
         if check_json_for_key(order_list[index]['pd3'], 'valuedOverUnit'):
             row_number += 1
 
-        height += row_number * 11.3
+        height += row_number * 11.25
         if row_active_order_number > row_number:
             table_order_paragraph_gen(i, row_number, order_list[index], t, j, page, False, False, height)
             i += 1
             row_active_order_number -= row_number
             if index == len(order_list) - 1:
-                table_total_paragraph_gen(t, j, row_active_order_number, True)
+                table_total_paragraph_gen(t, j, row_active_order_number, True, True, page)
         else:
             #     todo
-            table_total_paragraph_gen(t, j, row_active_order_number, False)
+            table_total_paragraph_gen(t, j, row_active_order_number, False, False, page)
             if order_list[i:]:
-                print(i)
                 table_more_orders_paragraph_gen(i, order_list[i:], j, pdf, False)
 
     layout.add(t)
 
 
-def table_total_paragraph_gen(table, j, row_number, is_draw):
-    if is_draw and row_number > 1:
+def table_total_paragraph_gen(table, j, row_number, is_draw, has_end_line, page):
+    if is_draw and row_number > 2:
+
         table.add(get_table_cell_order_index("", "Helvetica", 1, row_number, False, True))
 
-        title_list = [
-            ['Totals for Invoice', 'Invoice Value', '+/- MMV', 'Exchange', 'Entered Value'],
-            [f'{trans_json_for_key(j, 'totalsForInvoice')}', f'{add_commas(j['invoiceValue'])} USD',
-             '', '1.00000', f'{add_commas(j['enteredValue'])} USD'],
-        ]
-        title_list_index = 0
-
         is_empty = round((row_number - 2) / 2)
+        is_one_time = 1
 
         for index in range(row_number):
-            if index < is_empty or index >= is_empty + 2 and index != row_number - 1:
-                table.add(get_table_cell_order_info("", "Helvetica", 3, 1, False, False, False, True, Alignment.LEFT))
-                table.add(get_table_cell_order_info("", "Helvetica", 5, 1, False, False, True, False, Alignment.RIGHT))
-                table.add(get_table_cell_order_info("", "Helvetica", 2, 1, False, False, True, True, Alignment.RIGHT))
+            if ((((index < is_empty or index >= is_empty + 2) and has_end_line is not True) or
+                 (has_end_line and (index > 2 or index == 0))) and index != row_number - 1):
+                table.add(
+                    get_table_cell_order_info("", "Helvetica", 3, 1, False, False, False, True, Alignment.LEFT))
+                table.add(
+                    get_table_cell_order_info("", "Helvetica", 5, 1, False, False, True, False, Alignment.RIGHT))
+                table.add(
+                    get_table_cell_order_info("", "Helvetica", 2, 1, False, False, True, True, Alignment.RIGHT))
                 table.add(
                     get_table_cell_order_info("", "Helvetica", 3, 1, False, False, True, True, Alignment.CENTERED))
                 table.add(get_table_cell_order_info("", "Helvetica", 2, 1, False, False, True, True, Alignment.RIGHT))
@@ -205,44 +193,77 @@ def table_total_paragraph_gen(table, j, row_number, is_draw):
                 table.add(get_table_cell_order_info("", "Helvetica", 3, 1, False, True, False, True, Alignment.LEFT))
                 table.add(get_table_cell_order_info("", "Helvetica", 5, 1, False, True, True, False, Alignment.RIGHT))
                 table.add(get_table_cell_order_info("", "Helvetica", 2, 1, False, True, True, True, Alignment.RIGHT))
-                table.add(
-                    get_table_cell_order_info("", "Helvetica", 3, 1, False, True, True, True, Alignment.CENTERED))
+                table.add(get_table_cell_order_info("", "Helvetica", 3, 1, False, True, True, True, Alignment.CENTERED))
                 table.add(get_table_cell_order_info("", "Helvetica", 2, 1, False, True, True, True, Alignment.RIGHT))
             else:
-                table.add(get_table_cell_order_info(
-                    f"{title_list[title_list_index][0]}", "Helvetica", 4, 1, False, False, False, True, Alignment.LEFT))
-                table.add(get_table_cell_order_info(
-                    f"{title_list[title_list_index][1]}", "Helvetica", 4, 1, False, False, True, False,
-                    Alignment.RIGHT))
-                table.add(get_table_cell_order_info(
-                    f"{title_list[title_list_index][2]}", "Helvetica", 2, 1, False, False, True, True, Alignment.RIGHT))
-                table.add(get_table_cell_order_info(
-                    f"{title_list[title_list_index][3]}", "Helvetica", 3, 1, False, False, True, True,
-                    Alignment.CENTERED))
-                table.add(get_table_cell_order_info(
-                    f"{title_list[title_list_index][4]}", "Helvetica", 2, 1, False, False, True, True, Alignment.RIGHT))
-                title_list_index += 1
+                if is_one_time == 1:
+                    table_total_paragraph(j, table, row_number)
+                    is_one_time -= 1
     else:
         table.add(get_table_cell_order_index("", "Helvetica", 1, row_number, False, True))
 
         for index in range(row_number):
-            table.add(get_table_cell_order_info("", "Helvetica", 4, 1, False, False, False, True, Alignment.LEFT))
-            table.add(get_table_cell_order_info("", "Helvetica", 4, 1, False, False, True, False, Alignment.RIGHT))
-            table.add(get_table_cell_order_info("", "Helvetica", 2, 1, False, False, True, True, Alignment.RIGHT))
+            border_bottom = False
+            if index == row_number - 1:
+                border_bottom = True
             table.add(
-                get_table_cell_order_info("", "Helvetica", 3, 1, False, False, True, True, Alignment.CENTERED))
-            table.add(get_table_cell_order_info("", "Helvetica", 2, 1, False, False, True, True, Alignment.RIGHT))
+                get_table_cell_order_info("", "Helvetica", 4, 1, False, border_bottom, False, True, Alignment.LEFT))
+            table.add(
+                get_table_cell_order_info("", "Helvetica", 4, 1, False, border_bottom, True, False, Alignment.RIGHT))
+            table.add(
+                get_table_cell_order_info("", "Helvetica", 2, 1, False, border_bottom, True, True, Alignment.RIGHT))
+            table.add(
+                get_table_cell_order_info("", "Helvetica", 3, 1, False, border_bottom, True, True, Alignment.CENTERED))
+            table.add(
+                get_table_cell_order_info("", "Helvetica", 2, 1, False, border_bottom, True, True, Alignment.RIGHT))
+
+    if has_end_line and row_number > 3:
+        # todo
+        draw_line_for_self_style(page, 2, 300, 3)
 
 
-def draw_line_for_self_style(page):
+def table_total_paragraph(j, table, row_number):
+    title_list = [
+        ['Totals for Invoice', 'Invoice Value', '+/- MMV', 'Exchange', 'Entered Value'],
+        [f'{trans_json_for_key(j, 'totalsForInvoice')}', f'{add_commas(j['invoiceValue'])} USD',
+         '', '1.00000', f'{add_commas(j['enteredValue'])} USD'],
+    ]
+
+    for index in range(len(title_list)):
+        border_bottom = False
+        if index == row_number - 1 and row_number == 2:
+            border_bottom = True
+        table.add(get_table_cell_order_info(
+            f"{title_list[index][0]}",
+            "Helvetica", 4, 1, False, border_bottom, False, True, Alignment.LEFT))
+        table.add(get_table_cell_order_info(
+            f"{title_list[index][1]}",
+            "Helvetica", 4, 1, False, border_bottom, True, False,
+            Alignment.RIGHT))
+        table.add(get_table_cell_order_info(
+            f"{title_list[index][2]}",
+            "Helvetica", 2, 1, False, border_bottom, True, True, Alignment.RIGHT))
+        table.add(get_table_cell_order_info(
+            f"{title_list[index][3]}",
+            "Helvetica", 3, 1, False, border_bottom, True, True,
+            Alignment.CENTERED))
+        table.add(get_table_cell_order_info(
+            f"{title_list[index][4]}",
+            "Helvetica", 2, 1, False, border_bottom, True, True, Alignment.RIGHT))
+
+
+def draw_line_for_self_style(page, count, height, row_number):
+    decimal = 1.2
+    if count == 1:
+        decimal = 2.2
     Image(
-        Path(f"{root_dir}/../source/line.jpg"),
+        Path(f"{root_dir}/../source/line{count}.jpg"),
         width=Decimal(560),
-        height=Decimal(2),
+        height=Decimal(decimal),
         horizontal_alignment=Alignment.LEFT,
         vertical_alignment=Alignment.TOP
     ).paint(page, Rectangle(Decimal(25.704),
-                            page.get_page_info().get_height() - Decimal(332) - Decimal(8 * 11.25),
+                            page.get_page_info().get_height() - Decimal(height) - Decimal(row_number * 11.25),
                             Decimal(560),
-                            Decimal(2)
+                            Decimal(decimal)
                             ))
