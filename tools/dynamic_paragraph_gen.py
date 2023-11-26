@@ -20,13 +20,13 @@ def table_order_paragraph(table, j, layout, page, pdf):
     if check_json_for_key(order_list[0]['pd3'], 'valuedOverUnit'):
         row_number += 1
 
-    table_order_paragraph_gen(0, row_number, order_list[0], table, j, page, True, False, 337)
-    table_total_paragraph_gen(table, j, 14 - row_number, len(order_list) == 1, False, page)
+    table_order_paragraph_gen(0, row_number, order_list[0], table, j, page, True, False, 324.5 + row_number * 12.4)
+    table_total_paragraph_gen(table, j, 14 - row_number, len(order_list) == 1, False, page, 0)
     table_bottom_gen(table, j, page)
     layout.add(table)
 
     if len(order_list) > 1:
-        table_more_orders_paragraph_gen(1, order_list, j, pdf, True)
+        table_more_orders_paragraph_gen(1, order_list[1:], j, pdf)
 
 
 def table_order_paragraph_gen(i, row_number, data, table, j, page, is_first, border_bottom, height):
@@ -120,10 +120,10 @@ def table_order_paragraph_gen(i, row_number, data, table, j, page, is_first, bor
     table.add(get_table_cell_order_info(f"${data['pd4']['harborMaintenanceFee']}",
                                         "Helvetica", 2, 1, False, border_bottom, True, True, Alignment.RIGHT))
 
-    draw_line_for_self_style(page, 1, height, row_number)
+    draw_line_for_self_style(page, 1, height)
 
 
-def table_more_orders_paragraph_gen(i, order_list, j, pdf, is_pass):
+def table_more_orders_paragraph_gen(i, order_list, j, pdf):
     page = Page(width=Decimal(612), height=Decimal(792))
     pdf.add_page(page)
     layout: PageLayout = Layout(page)
@@ -142,34 +142,40 @@ def table_more_orders_paragraph_gen(i, order_list, j, pdf, is_pass):
 
     table_middle4_gen(t)
 
-    height = 27.25
+    order_count = 0
+    height = 116
     row_active_order_number = 56
-    for index in range(len(order_list)):
-        if index == 0 and is_pass:
-            continue
 
-        info_list: [] = order_list[index]['pd1']['info']
-        row_number = 4 + len(info_list) * 2
-        if check_json_for_key(order_list[index]['pd3'], 'valuedOverUnit'):
-            row_number += 1
+    if len(order_list) == 0:
+        table_total_paragraph_gen(t, j, row_active_order_number, True, True, page, height + 46.85)
+    else:
+        for index in range(len(order_list)):
 
-        height += row_number * 11.25
-        if row_active_order_number > row_number:
-            table_order_paragraph_gen(i, row_number, order_list[index], t, j, page, False, False, height)
-            i += 1
-            row_active_order_number -= row_number
-            if index == len(order_list) - 1:
-                table_total_paragraph_gen(t, j, row_active_order_number, True, True, page)
-        else:
-            #     todo
-            table_total_paragraph_gen(t, j, row_active_order_number, False, False, page)
-            if order_list[i:]:
-                table_more_orders_paragraph_gen(i, order_list[i:], j, pdf, False)
+            info_list: [] = order_list[index]['pd1']['info']
+            row_number = 4 + len(info_list) * 2
+
+            if check_json_for_key(order_list[index]['pd3'], 'valuedOverUnit'):
+                row_number += 1
+
+            height += row_number * 11.65
+            if row_active_order_number > row_number:
+                table_order_paragraph_gen(i, row_number, order_list[index], t, j, page, False, False, height)
+                i += 1
+                order_count += 1
+                row_active_order_number -= row_number
+                if index == len(order_list) - 1:
+                    table_total_paragraph_gen(t, j, row_active_order_number, True, True, page, height + 46.85)
+                    if row_active_order_number < 3:
+                        table_more_orders_paragraph_gen(i, order_list[order_count:], j, pdf)
+            else:
+                table_total_paragraph_gen(t, j, row_active_order_number, False, False, page, 0)
+                if order_list[order_count:]:
+                    table_more_orders_paragraph_gen(i, order_list[order_count:], j, pdf)
 
     layout.add(t)
 
 
-def table_total_paragraph_gen(table, j, row_number, is_draw, has_end_line, page):
+def table_total_paragraph_gen(table, j, row_number, is_draw, has_end_line, page, height):
     if is_draw and row_number > 2:
 
         table.add(get_table_cell_order_index("", "Helvetica", 1, row_number, False, True))
@@ -189,7 +195,7 @@ def table_total_paragraph_gen(table, j, row_number, is_draw, has_end_line, page)
                 table.add(
                     get_table_cell_order_info("", "Helvetica", 3, 1, False, False, True, True, Alignment.CENTERED))
                 table.add(get_table_cell_order_info("", "Helvetica", 2, 1, False, False, True, True, Alignment.RIGHT))
-            elif index == row_number - 1:
+            elif index == row_number - 1 and row_number > 3:
                 table.add(get_table_cell_order_info("", "Helvetica", 3, 1, False, True, False, True, Alignment.LEFT))
                 table.add(get_table_cell_order_info("", "Helvetica", 5, 1, False, True, True, False, Alignment.RIGHT))
                 table.add(get_table_cell_order_info("", "Helvetica", 2, 1, False, True, True, True, Alignment.RIGHT))
@@ -218,8 +224,7 @@ def table_total_paragraph_gen(table, j, row_number, is_draw, has_end_line, page)
                 get_table_cell_order_info("", "Helvetica", 2, 1, False, border_bottom, True, True, Alignment.RIGHT))
 
     if has_end_line and row_number > 3:
-        # todo
-        draw_line_for_self_style(page, 2, 300, 3)
+        draw_line_for_self_style(page, 2, height)
 
 
 def table_total_paragraph(j, table, row_number):
@@ -231,7 +236,7 @@ def table_total_paragraph(j, table, row_number):
 
     for index in range(len(title_list)):
         border_bottom = False
-        if index == row_number - 1 and row_number == 2:
+        if index == 1 and row_number == 3:
             border_bottom = True
         table.add(get_table_cell_order_info(
             f"{title_list[index][0]}",
@@ -252,7 +257,7 @@ def table_total_paragraph(j, table, row_number):
             "Helvetica", 2, 1, False, border_bottom, True, True, Alignment.RIGHT))
 
 
-def draw_line_for_self_style(page, count, height, row_number):
+def draw_line_for_self_style(page, count, height):
     decimal = 1.2
     if count == 1:
         decimal = 2.2
@@ -263,7 +268,7 @@ def draw_line_for_self_style(page, count, height, row_number):
         horizontal_alignment=Alignment.LEFT,
         vertical_alignment=Alignment.TOP
     ).paint(page, Rectangle(Decimal(25.704),
-                            page.get_page_info().get_height() - Decimal(height) - Decimal(row_number * 11.25),
+                            page.get_page_info().get_height() - Decimal(height),
                             Decimal(560),
                             Decimal(decimal)
                             ))

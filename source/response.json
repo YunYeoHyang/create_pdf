@@ -30,7 +30,7 @@
 			"pd1": {
 				"info": [
 					{
-						"infoField1": "FURNG ART:OTH:N/KNIT,WOOL,FOLK2",
+						"infoField1": "1",
 						"infoField2": "6304.99.1000",
 						"infoField3": null
 					},
@@ -68,7 +68,7 @@
 			"pd1": {
 				"info": [
 					{
-						"infoField1": "FURNG ART:OTH:N/KNIT,WOOL,FOLK2",
+						"infoField1": "2",
 						"infoField2": "6304.99.1000",
 						"infoField3": null
 					},
@@ -106,46 +106,7 @@
 			"pd1": {
 				"info": [
 					{
-						"infoField1": "FURNG ART:OTH:N/KNIT,WOOL,FOLK2",
-						"infoField2": "6304.99.1000",
-						"infoField3": null
-					},
-					{
-						"infoField1": "FURNG ART:OTH:N/KNIT,WOOL,FOLK2",
-						"infoField2": "6304.99.1000",
-						"infoField3": "2764.68"
-					}
-				],
-				"manifestQty": 1390,
-				"manifestQtyShow": true,
-				"netQuantityIn": 630.3,
-				"netQuantityInShow": true
-			},
-			"pd2": {
-				"totalValue": 931.3,
-				"moneyC": 866
-			},
-			"pd3": {
-				"htsusRate1": "0.25",
-				"htsusRate2": "FREE",
-				"valuedOver": 0.075,
-				"valuedOverUnit": "per NO",
-				"cottonFee": 0.00494,
-				"cottonFeeUnit": "per NO"
-			},
-			"pd4": {
-				"dutyAndIrTax1": 0.0,
-				"dutyAndIrTax2": 104.25,
-				"cottonFeeResult": 6.87,
-				"merchandiseProcessingFee": 3.23,
-				"harborMaintenanceFee": 1.16
-			}
-		},
-		{
-			"pd1": {
-				"info": [
-					{
-						"infoField1": "FURNG ART:OTH:N/KNIT,WOOL,FOLK2",
+						"infoField1": "3",
 						"infoField2": "6304.99.1000",
 						"infoField3": null
 					},
@@ -184,7 +145,7 @@
 			"pd1": {
 				"info": [
 					{
-						"infoField1": "FURNG ART:OTH:N/KNIT,WOOL,FOLK2",
+						"infoField1": "4",
 						"infoField2": "6304.99.1000",
 						"infoField3": null
 					},
@@ -223,7 +184,7 @@
 			"pd1": {
 				"info": [
 					{
-						"infoField1": "FURNG ART:OTH:N/KNIT,WOOL,FOLK2",
+						"infoField1": "5",
 						"infoField2": "6304.99.1000",
 						"infoField3": null
 					},
@@ -262,7 +223,7 @@
 			"pd1": {
 				"info": [
 					{
-						"infoField1": "FURNG ART:OTH:N/KNIT,WOOL,FOLK2",
+						"infoField1": "6",
 						"infoField2": "6304.99.1000",
 						"infoField3": null
 					},
@@ -301,7 +262,46 @@
 			"pd1": {
 				"info": [
 					{
-						"infoField1": "11111",
+						"infoField1": "7",
+						"infoField2": "6304.99.1000",
+						"infoField3": null
+					},
+					{
+						"infoField1": "FURNG ART:OTH:N/KNIT,WOOL,FOLK2",
+						"infoField2": "6304.99.1000",
+						"infoField3": "2764.68"
+					}
+				],
+				"manifestQty": 1390,
+				"manifestQtyShow": true,
+				"netQuantityIn": 630.3,
+				"netQuantityInShow": true
+			},
+			"pd2": {
+				"totalValue": 931.3,
+				"moneyC": 866
+			},
+			"pd3": {
+				"htsusRate1": "0.25",
+				"htsusRate2": "FREE",
+				"valuedOver": 0.075,
+				"valuedOverUnit": "per NO",
+				"cottonFee": 0.00494,
+				"cottonFeeUnit": "per NO"
+			},
+			"pd4": {
+				"dutyAndIrTax1": 0.0,
+				"dutyAndIrTax2": 104.25,
+				"cottonFeeResult": 6.87,
+				"merchandiseProcessingFee": 3.23,
+				"harborMaintenanceFee": 1.16
+			}
+		},
+		{
+			"pd1": {
+				"info": [
+					{
+						"infoField1": "8",
 						"infoField2": "6304.99.1000",
 						"infoField3": null
 					},

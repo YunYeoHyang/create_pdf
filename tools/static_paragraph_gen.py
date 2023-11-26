@@ -271,16 +271,25 @@ def table_bottom_gen(table, j, page):
                             Decimal(21)
                             ))
 
-    table.add(get_table_cell_def("Other Fee Summary(for Block 39)", "Helvetica", 9, 3, 4))
+    table.add(get_table_cell_def(
+        "Other Fee Summary(for Block 39)" +
+        (f"\n056 - Cotton Free                 $ {j['totalCottonFee']}" if
+         check_json_for_key(j, 'totalCottonFee') else '') +
+        f"\n499 - MPF                            $ {j['mpf']}" +
+        f"\n501 - HMF                            $ {j['hmf']}",
+        "Helvetica", 9, 3, 4))
     table.add(get_table_cell_title_def("35. Total Entered Value", "Helvetica", 6, 1))
     table.add(get_table_cell_def("   CBP USE ONLY", "Helvetica-Bold", 12, 5, 1))
     table.add(get_table_cell_def("   TOTALS", "Helvetica", 12, 2, 1))
+
     table.add(get_table_cell_content_def("$ 11,397", "Helvetica", 6, 1, Alignment.LEFT))
     table.add(get_table_cell_def("A. LIQ CODE", "Helvetica", 9, 2, 2))
     table.add(get_table_cell_def("B. Ascertained Duty", "Helvetica", 9, 3, 2))
     table.add(get_table_cell_title_def("37. Duty", "Helvetica", 2, 1))
+
     table.add(get_table_cell_title_def("Total Other Fees", "Helvetica", 6, 1))
     table.add(get_table_cell_content_def(f"$ {j['num37Duty']}", "Helvetica", 2, 1, Alignment.RIGHT))
+
     table.add(get_table_cell_content_def(f"$ {j['totalOtherFees']}", "Helvetica", 6, 1, Alignment.LEFT))
     table.add(get_table_cell_def("REASON CODE", "Helvetica", 9, 2, 6))
     table.add(get_table_cell_def("C. Ascertained Tax", "Helvetica", 9, 3, 2))
